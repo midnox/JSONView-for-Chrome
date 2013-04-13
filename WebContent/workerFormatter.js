@@ -24,7 +24,8 @@ function valueToHTML(value) {
 		output += decorateWithSpan(value, "type-number");
 	else if (valueType == "string")
 		if (/^\/[^\s]+$/.test(value)) {
-			output += decorateWithSpan('"', "type-string") + '<a href="' + value + '.json">' + htmlEncode(value) + '</a>' + decorateWithSpan('"', "type-string");
+			separator = /\?/.test(value) ? '&' : '?'
+			output += decorateWithSpan('"', "type-string") + '<a href="' + value + separator + 'format=json">' + htmlEncode(value) + '</a>' + decorateWithSpan('"', "type-string");
 		} else if (/^(http|https):\/\/[^\s]+$/.test(value)) {
 			output += decorateWithSpan('"', "type-string") + '<a href="' + value + '">' + htmlEncode(value) + '</a>' + decorateWithSpan('"', "type-string");
 		} else {
