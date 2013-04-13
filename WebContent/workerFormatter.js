@@ -23,10 +23,13 @@ function valueToHTML(value) {
 	else if (valueType == "number")
 		output += decorateWithSpan(value, "type-number");
 	else if (valueType == "string")
-		if (/^(http|https):\/\/[^\s]+$/.test(value))
+		if (/^\/[^\s]+$/.test(value)) {
+			output += decorateWithSpan('"', "type-string") + '<a href="' + value + '.json">' + htmlEncode(value) + '</a>' + decorateWithSpan('"', "type-string");
+		} else if (/^(http|https):\/\/[^\s]+$/.test(value)) {
 			output += decorateWithSpan('"', "type-string") + '<a href="' + value + '">' + htmlEncode(value) + '</a>' + decorateWithSpan('"', "type-string");
-		else
+		} else {
 			output += decorateWithSpan('"' + value + '"', "type-string");
+		}
 	else if (valueType == "boolean")
 		output += decorateWithSpan(value, "type-boolean");
 
